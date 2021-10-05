@@ -1,0 +1,44 @@
+! 6-bus system
+
+$TOLAC   0.1 ;
+$TOLREAC 0.1 ;
+$NBITMA  20 ;
+$MISBLOC  10. ;
+$MISADJ   0.1 ;
+$MISQLIM  10. ;
+$PLIM 1 ;
+$DIVDET 0. ;
+
+BUS       A     15.     0.0      0.0     0.0     0.0   ;
+BUS       B    380.     0.0      0.0     0.0     0.0   ;
+BUS       C    380.     0.0      0.0     0.0     0.0   ;
+BUS       D    150.   100.0     30.0     0.0     0.0   ;
+BUS       E    150.   400.0    120.0     0.0     0.0   ;
+BUS       F     15.     0.0      0.0     0.0     0.0   ;
+LINE     'B-C'  B  C
+   1.5   15.   75.  1350. 1 ;
+LINE     'D-E'  D  E       
+   4.0   20.   60.   300. 1 ;
+TRANSFO  'D-B'  D  B
+   0.    14.    0. 0.  100.  0. 300. 1 ;
+TRANSFO  'E-C'  E  C
+   0.    14.    0. 0.  100.  0. 600. 1 ;
+TRANSFO  'A-B'  A  B
+   0.    14.    0. 0.  108.  0. 500. 1 ;
+TRANSFO  'F-B'  F  B
+   0.    14.    0. 0.  108.  0. 250. 1 ;
+GENER     A  A  A
+   0. 0. 1.0  500. -9990.  9999. 1 ;
+GENER     F  F  F
+   150. 0. 1.0  200. -9990.  9999. 1 ;
+SLACK     A     ;  
+
+% uncomment the lines below to activate the adjustment of transformer ratios
+
+%LTC-V        'E-C'    E
+% 80.0   110.00     25    0.01   1.0   30 10  ;
+%LTC-V        'D-B'    D
+% 80.0   110.00     25    0.01   1.0   30 10  ;
+
+
+
